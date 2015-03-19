@@ -17,7 +17,6 @@ var $ = function (selector) {
         idNameLength = selector.length - idNameStart;
       }
       idName = selector.substr(idNameStart, idNameLength);
-      console.log('idName', idName);
     }
   }
 
@@ -32,7 +31,6 @@ var $ = function (selector) {
         classNameLength = selector.length - classNameStart;
       }
       className = selector.substr(classNameStart, classNameLength);
-      console.log('className', className);
     }
   }
 
@@ -47,7 +45,6 @@ var $ = function (selector) {
         tagNameIndexEnd = selector.length;
       }
       tagName = selector.substr(tagNameStart, tagNameLength);
-      console.log('tagName', tagName);
     }
   }
 
@@ -56,7 +53,6 @@ var $ = function (selector) {
   findTagName(selector);
 
 //Find matching elements
-  var resultMatches = [];
   var resultId = [];
   var resultClass = [];
   var resultTag = [];
@@ -65,42 +61,31 @@ var $ = function (selector) {
   if (idName !== undefined) {
     resultId.push(document.getElementById(idName));
     selectorsUsed += 1;
-    console.log('ResultId', resultId);
   }
   if (className !== undefined) {
     resultClass = [].slice.call(document.getElementsByClassName(className));
     selectorsUsed += 1;
-    console.log('ResultClass', resultClass);
   }
   if (tagName !== undefined) {
     resultTag = [].slice.call(document.getElementsByTagName(tagName));
     selectorsUsed += 1;
-    console.log('ResultTag', resultTag);
   }
 
-//concatonate results from all selectors
   var concatResult = resultId.concat(resultClass, resultTag);
-  console.log('concatresult', concatResult);
 
-//get unique values from concatonated results
   var uniqueItems  = concatResult.filter(function(value, index, self) {
     return self.indexOf(value) === index;
   });
 
-  console.log('uniqueItems', uniqueItems);
-
   for (var i = 0; i < uniqueItems.length; i++) {
     var uniqueValue = uniqueItems[i];
     var filterByProperty = concatResult.filter(function(value) {
-      console.log('value ', value, 'uniqueValue ', uniqueValue);
       return value === uniqueValue;
     });
-    console.log('filterByProperty', filterByProperty);
     if (filterByProperty.length === selectorsUsed) {
       elements.push(uniqueValue);
     }
   }
 
-  console.log('elements', elements);
   return elements;
 }
