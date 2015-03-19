@@ -1,10 +1,8 @@
 var $ = function (selector) {
   var elements = [];
-
   var idName = findName(selector, 'id');
   var className = findName(selector, 'class');
   var tagName = findTagName(selector);
-
   var resultId = [], resultClass = [], resultTag = [];
   var selectorsUsed = 0;
 
