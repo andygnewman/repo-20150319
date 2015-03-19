@@ -1,6 +1,7 @@
 var $ = function (selector) {
   var elements = [];
 
+// Parse individual selectors
   var idName;
   var className;
   var tagName;
@@ -54,6 +55,7 @@ var $ = function (selector) {
   findClassName(selector);
   findTagName(selector);
 
+//Find matching elements
   var resultMatches = [];
   var resultId = [];
   var resultClass = [];
@@ -66,34 +68,26 @@ var $ = function (selector) {
     console.log('ResultId', resultId);
   }
   if (className !== undefined) {
-    resultClass = document.getElementsByClassName(className);
+    resultClass = [].slice.call(document.getElementsByClassName(className));
     selectorsUsed += 1;
     console.log('ResultClass', resultClass);
   }
   if (tagName !== undefined) {
-    resultTag = document.getElementsByTagName(tagName);
+    resultTag = [].slice.call(document.getElementsByTagName(tagName));
     selectorsUsed += 1;
     console.log('ResultTag', resultTag);
   }
 
-  if (selectorsUsed === 1) {
-    if (resultId.length > 0) {
-      resultMatches = resultId;
-    }
-    if (resultClass.length > 0) {
-      resultMatches = resultClass;
-    }
-    if (resultTag.length > 0) {
-      resultMatches = resultTag;
-    }
-  }
+//concatonate results from all selectors
+  var concatResult = resultId.concat(resultClass, resultTag);
+  console.log('concatresult', concatResult);
 
-  for (var i = 0; i < resultMatches.length; i++) {
-    console.log('result', resultMatches[i]);
-    console.log('tagname', resultMatches[i].tagName);
-  }
+//get unique values from concatonated results
+  var uniqueItems  = concatResult.filter(function(value, index, self) {
+    return self.indexOf(value) === index;
+  });
 
-  elements = resultMatches;
+  console.log('uniqueItems', uniqueItems);
 
   console.log('elements', elements);
   return elements;
