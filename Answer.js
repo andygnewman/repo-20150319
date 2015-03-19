@@ -42,14 +42,11 @@ var $ = function (selector) {
 
 var findTagName = function(selector) {
   if (selector.slice(0,1).search(/[\W]/) === -1 ) {
-    var tagNameStart = 0;
-    var tagNameLength;
+    var tagNameStart = 0, tagNameLength;
     if (/[\W]/.exec(selector)) {
       tagNameLength = selector.indexOf(/[\W]/.exec(selector));
     }
-    else {
-      tagNameIndexEnd = selector.length;
-    }
+    else tagNameIndexEnd = selector.length;
     return selector.substr(tagNameStart, tagNameLength);
   }
 }
@@ -59,8 +56,7 @@ var findName = function(selector, type) {
   else if (type === 'id') var first = '#', second = '.';
   else return 'Unhandled type';
   if (selector.indexOf(first) !== -1) {
-    var nameStart = selector.indexOf(first) + 1;
-    var nameLength;
+    var nameStart = selector.indexOf(first) + 1, nameLength;
     if (selector.substr(selector.indexOf(first)).indexOf(second) !== -1) {
       nameLength = selector.substr(selector.indexOf(first) + 1).
         indexOf(second);
