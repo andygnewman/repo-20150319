@@ -89,6 +89,18 @@ var $ = function (selector) {
 
   console.log('uniqueItems', uniqueItems);
 
+  for (var i = 0; i < uniqueItems.length; i++) {
+    var uniqueValue = uniqueItems[i];
+    var filterByProperty = concatResult.filter(function(value) {
+      console.log('value ', value, 'uniqueValue ', uniqueValue);
+      return value === uniqueValue;
+    });
+    console.log('filterByProperty', filterByProperty);
+    if (filterByProperty.length === selectorsUsed) {
+      elements.push(uniqueValue);
+    }
+  }
+
   console.log('elements', elements);
   return elements;
 }
